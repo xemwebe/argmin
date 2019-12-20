@@ -13,6 +13,7 @@ use argmin::solver::quasinewton::BFGS;
 use argmin::testfunctions::rosenbrock;
 use argmin_core::finitediff::*;
 use ndarray::{array, Array1, Array2};
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Serialize, Deserialize)]

@@ -11,6 +11,7 @@ use argmin::prelude::*;
 use argmin::solver::gaussnewton::GaussNewtonLS;
 use argmin::solver::linesearch::MoreThuenteLineSearch;
 use ndarray::{Array1, Array2};
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 type Rate = f64;

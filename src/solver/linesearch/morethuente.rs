@@ -19,7 +19,9 @@
 //! DOI: https://doi.org/10.1145/192115.192132
 
 use crate::prelude::*;
+#[cfg(feature = "serde1")] 
 use serde::de::DeserializeOwned;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 use std::default::Default;
 
@@ -36,7 +38,8 @@ use std::default::Default;
 /// [0] Jorge J. More and David J. Thuente. "Line search algorithms with guaranteed sufficient
 /// decrease." ACM Trans. Math. Softw. 20, 3 (September 1994), 286-307.
 /// DOI: https://doi.org/10.1145/192115.192132
-#[derive(Serialize, Deserialize, Clone)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone)]
 pub struct MoreThuenteLineSearch<P> {
     /// Search direction (builder)
     search_direction_b: Option<P>,
@@ -86,7 +89,8 @@ pub struct MoreThuenteLineSearch<P> {
     infoc: usize,
 }
 
-#[derive(Default, Clone, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Default, Clone)]
 struct Step {
     pub x: f64,
     pub fx: f64,

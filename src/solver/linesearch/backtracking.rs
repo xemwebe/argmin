@@ -9,7 +9,9 @@
 
 use crate::prelude::*;
 use crate::solver::linesearch::condition::*;
+#[cfg(feature = "serde1")] 
 use serde::de::DeserializeOwned;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 /// The Backtracking line search is a simple method to find a step length which obeys the Armijo
@@ -23,7 +25,8 @@ use serde::{Deserialize, Serialize};
 /// Springer. ISBN 0-387-30303-0.
 ///
 /// [1] Wikipedia: https://en.wikipedia.org/wiki/Backtracking_line_search
-#[derive(Serialize, Deserialize, Clone)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone)]
 pub struct BacktrackingLineSearch<P, L> {
     /// initial parameter vector
     init_param: P,

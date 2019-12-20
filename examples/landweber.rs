@@ -10,6 +10,7 @@ use argmin::prelude::*;
 use argmin::solver::landweber::*;
 use argmin::testfunctions::{rosenbrock_2d, rosenbrock_2d_derivative};
 use argmin_core::Error;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Serialize, Deserialize)]

@@ -11,6 +11,7 @@ use argmin::solver::conjugategradient::NonlinearConjugateGradient;
 use argmin::solver::conjugategradient::PolakRibiere;
 use argmin::solver::linesearch::MoreThuenteLineSearch;
 use argmin::testfunctions::{rosenbrock_2d, rosenbrock_2d_derivative};
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Serialize, Deserialize)]

@@ -12,6 +12,7 @@
 use crate::prelude::*;
 use argmin_core::ArgminAdd;
 use argmin_core::ArgminOp;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 use std;
 use std::default::Default;
@@ -24,7 +25,7 @@ use std::f64;
 /// # References:
 ///
 /// TODO
-#[derive(Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
 pub struct ParticleSwarm<O>
 where
     O: ArgminOp<Output = f64>,
@@ -225,7 +226,8 @@ trait_bound!(Position
 );
 
 /// A single particle
-#[derive(Clone, Serialize, Deserialize, Debug)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Debug)]
 pub struct Particle<T: Position> {
     /// Position of particle
     pub position: T,

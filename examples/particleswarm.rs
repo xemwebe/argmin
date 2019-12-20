@@ -8,6 +8,7 @@
 extern crate argmin;
 use argmin::prelude::*;
 use argmin::solver::particleswarm::*;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 use argmin_testfunctions::himmelblau;

@@ -10,6 +10,7 @@
 //! [Wikipedia](https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method)
 
 use crate::prelude::*;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 use std::default::Default;
 
@@ -36,7 +37,8 @@ use std::default::Default;
 /// # References:
 ///
 /// [Wikipedia](https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method)
-#[derive(Clone, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone)]
 pub struct NelderMead<O: ArgminOp> {
     /// alpha
     alpha: f64,

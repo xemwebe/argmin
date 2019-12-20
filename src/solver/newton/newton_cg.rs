@@ -14,6 +14,7 @@
 
 use crate::prelude::*;
 use crate::solver::conjugategradient::ConjugateGradient;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 /// The Newton-CG method (also called truncated Newton method) uses a modified CG to solve the
@@ -25,7 +26,8 @@ use serde::{Deserialize, Serialize};
 ///
 /// [0] Jorge Nocedal and Stephen J. Wright (2006). Numerical Optimization.
 /// Springer. ISBN 0-387-30303-0.
-#[derive(Clone, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone)]
 pub struct NewtonCG<L> {
     /// line search
     linesearch: L,
@@ -150,7 +152,8 @@ where
     }
 }
 
-#[derive(Clone, Default, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Default)]
 struct CGSubProblem<T, H> {
     hessian: H,
     phantom: std::marker::PhantomData<T>,

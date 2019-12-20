@@ -12,6 +12,7 @@ use argmin::solver::linesearch::MoreThuenteLineSearch;
 use argmin::solver::newton::NewtonCG;
 use argmin::testfunctions::{rosenbrock_2d, rosenbrock_2d_derivative, rosenbrock_2d_hessian};
 use ndarray::{Array, Array1, Array2};
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Serialize, Deserialize)]

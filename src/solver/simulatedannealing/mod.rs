@@ -18,6 +18,7 @@
 use crate::prelude::*;
 use rand::prelude::*;
 use rand_xorshift::XorShiftRng;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 /// Temperature functions for Simulated Annealing.
@@ -30,7 +31,8 @@ use serde::{Deserialize, Serialize};
 /// * `SATempFunc::Exponential`: `t_i = t_init * 0.95^i`
 // /// * `SATempFunc::Custom`: User provided temperature update function which must have the function
 // ///   signature `&Fn(init_temp: f64, iteration_number: u64) -> f64`
-#[derive(Clone, Copy, Serialize, Deserialize, Debug)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Copy, Debug)]
 pub enum SATempFunc {
     /// `t_i = t_init / i`
     TemperatureFast,
@@ -60,7 +62,8 @@ impl std::default::Default for SATempFunc {
 /// [1] S Kirkpatrick, CD Gelatt Jr, MP Vecchi. (1983). "Optimization by Simulated Annealing".
 /// Science 13 May 1983, Vol. 220, Issue 4598, pp. 671-680
 /// DOI: 10.1126/science.220.4598.671  
-#[derive(Clone, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone)]
 pub struct SimulatedAnnealing {
     /// Initial temperature
     init_temp: f64,

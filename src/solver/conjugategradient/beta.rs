@@ -15,12 +15,15 @@
 //! Springer. ISBN 0-387-30303-0.
 
 use crate::prelude::*;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 /// Fletcher and Reeves (FR) method
 /// TODO: Reference
+#[cfg(feature = "serde1")] 
+#[derive(Serialize, Deserialize)]
 #[derive(
-    Default, Serialize, Deserialize, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug,
+    Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug,
 )]
 pub struct FletcherReeves {}
 
@@ -42,8 +45,10 @@ where
 
 /// Polak and Ribiere (PR) method
 /// TODO: Reference
+#[cfg(feature = "serde1")]
+#[derive(    Serialize, Deserialize)]
 #[derive(
-    Default, Serialize, Deserialize, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug,
+    Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug,
 )]
 pub struct PolakRibiere {}
 
@@ -66,8 +71,9 @@ where
 
 /// Polak and Ribiere Plus (PR+) method
 /// TODO: Reference
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
 #[derive(
-    Default, Serialize, Deserialize, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug,
+    Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug,
 )]
 pub struct PolakRibierePlus {}
 
@@ -91,8 +97,9 @@ where
 
 /// Hestenes and Stiefel (HS) method
 /// TODO: Reference
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
 #[derive(
-    Default, Serialize, Deserialize, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug,
+    Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug,
 )]
 pub struct HestenesStiefel {}
 

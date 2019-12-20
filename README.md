@@ -271,6 +271,7 @@ cost function values, iteration number, ...), respectively.
 
 ```rust
 use argmin::prelude::*;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 // Define a struct which holds any parameters/data which are needed during the execution of the

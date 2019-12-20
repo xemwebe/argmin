@@ -11,6 +11,7 @@
 //! Springer. ISBN 0-387-30303-0.
 
 use crate::prelude::*;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 use std::default::Default;
 
@@ -22,7 +23,8 @@ use std::default::Default;
 ///
 /// [0] Jorge Nocedal and Stephen J. Wright (2006). Numerical Optimization.
 /// Springer. ISBN 0-387-30303-0.
-#[derive(Clone, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone)]
 pub struct GaussNewtonLS<L> {
     /// linesearch
     linesearch: L,
@@ -101,7 +103,8 @@ where
 }
 
 #[doc(hidden)]
-#[derive(Clone, Default, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Default)]
 pub struct LineSearchOP<O> {
     op: O,
 }

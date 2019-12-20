@@ -11,6 +11,7 @@
 //! Springer. ISBN 0-387-30303-0.
 
 use crate::{ArgminDot, ArgminError, Error};
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 /// Needs to be implemented by everything that wants to be a LineSearchCondition
@@ -31,7 +32,8 @@ pub trait LineSearchCondition<T>: Serialize {
 }
 
 /// Armijo Condition
-#[derive(Clone, Copy, Debug, Default, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Copy, Debug, Default)]
 pub struct ArmijoCondition {
     c: f64,
 }
@@ -71,7 +73,8 @@ where
 }
 
 /// Wolfe Condition
-#[derive(Clone, Copy, Debug, Default, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Copy, Debug, Default)]
 pub struct WolfeCondition {
     c1: f64,
     c2: f64,
@@ -120,7 +123,8 @@ where
 }
 
 /// Strong Wolfe conditions
-#[derive(Clone, Copy, Debug, Default, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Copy, Debug, Default)]
 pub struct StrongWolfeCondition {
     c1: f64,
     c2: f64,
@@ -169,7 +173,8 @@ where
 }
 
 /// Goldstein conditions
-#[derive(Clone, Copy, Debug, Default, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Copy, Debug, Default)]
 pub struct GoldsteinCondition {
     c: f64,
 }

@@ -8,6 +8,7 @@
 extern crate argmin;
 use argmin::prelude::*;
 use argmin::solver::brent::Brent;
+#[cfg(feature = "serde1")] 
 use serde::{Deserialize, Serialize};
 
 /// Test function generalise from Wikipedia example
