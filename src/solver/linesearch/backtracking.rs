@@ -9,9 +9,9 @@
 
 use crate::prelude::*;
 use crate::solver::linesearch::condition::*;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::de::DeserializeOwned;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
 /// The Backtracking line search is a simple method to find a step length which obeys the Armijo
@@ -74,7 +74,7 @@ impl<P: Default, L> BacktrackingLineSearch<P, L> {
 
 impl<P, L> ArgminLineSearch<P> for BacktrackingLineSearch<P, L>
 where
-    P: Clone + Serialize + ArgminSub<P, P> + ArgminDot<P, f64> + ArgminScaledAdd<P, f64, P>,
+    P: Clone + ArgminSub<P, P> + ArgminDot<P, f64> + ArgminScaledAdd<P, f64, P>,
     L: LineSearchCondition<P>,
 {
     /// Set search direction
@@ -97,13 +97,7 @@ where
 
 impl<O, P, L> Solver<O> for BacktrackingLineSearch<P, L>
 where
-    P: Clone
-        + Default
-        + Serialize
-        + DeserializeOwned
-        + ArgminSub<P, P>
-        + ArgminDot<P, f64>
-        + ArgminScaledAdd<P, f64, P>,
+    P: Clone + Default + ArgminSub<P, P> + ArgminDot<P, f64> + ArgminScaledAdd<P, f64, P>,
     O: ArgminOp<Param = P, Output = f64>,
     L: LineSearchCondition<P>,
 {

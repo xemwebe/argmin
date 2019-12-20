@@ -16,9 +16,9 @@
 //! DOI: https://doi.org/10.1137/030601880
 
 use crate::prelude::*;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::de::DeserializeOwned;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std::default::Default;
 
@@ -134,12 +134,7 @@ impl<P: Default> HagerZhangLineSearch<P> {
 
 impl<P> HagerZhangLineSearch<P>
 where
-    P: Clone
-        + Default
-        + Serialize
-        + DeserializeOwned
-        + ArgminScaledAdd<P, f64, P>
-        + ArgminDot<P, f64>,
+    P: Clone + Default + ArgminScaledAdd<P, f64, P> + ArgminDot<P, f64>,
 {
     /// set delta
     pub fn delta(mut self, delta: f64) -> Result<Self, Error> {
@@ -406,12 +401,7 @@ impl<P: Default> Default for HagerZhangLineSearch<P> {
 
 impl<P> ArgminLineSearch<P> for HagerZhangLineSearch<P>
 where
-    P: Clone
-        + Default
-        + Serialize
-        + ArgminSub<P, P>
-        + ArgminDot<P, f64>
-        + ArgminScaledAdd<P, f64, P>,
+    P: Clone + Default + ArgminSub<P, P> + ArgminDot<P, f64> + ArgminScaledAdd<P, f64, P>,
 {
     /// Set search direction
     fn set_search_direction(&mut self, search_direction: P) {
@@ -428,13 +418,7 @@ where
 impl<P, O> Solver<O> for HagerZhangLineSearch<P>
 where
     O: ArgminOp<Param = P, Output = f64>,
-    P: Clone
-        + Default
-        + Serialize
-        + DeserializeOwned
-        + ArgminSub<P, P>
-        + ArgminDot<P, f64>
-        + ArgminScaledAdd<P, f64, P>,
+    P: Clone + Default + ArgminSub<P, P> + ArgminDot<P, f64> + ArgminScaledAdd<P, f64, P>,
 {
     const NAME: &'static str = "Hager-Zhang Line search";
 

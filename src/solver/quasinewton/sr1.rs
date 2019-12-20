@@ -11,9 +11,9 @@
 //! Springer. ISBN 0-387-30303-0.
 
 use crate::prelude::*;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::de::DeserializeOwned;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std::fmt::Debug;
 
@@ -66,7 +66,6 @@ where
     O::Param: Debug
         + Clone
         + Default
-        + Serialize
         + ArgminSub<O::Param, O::Param>
         + ArgminDot<O::Param, f64>
         + ArgminDot<O::Param, O::Hessian>
@@ -75,8 +74,6 @@ where
     O::Hessian: Debug
         + Clone
         + Default
-        + Serialize
-        + DeserializeOwned
         + ArgminSub<O::Hessian, O::Hessian>
         + ArgminDot<O::Param, O::Param>
         + ArgminDot<O::Hessian, O::Hessian>

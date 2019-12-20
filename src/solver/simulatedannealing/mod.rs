@@ -18,7 +18,7 @@
 use crate::prelude::*;
 use rand::prelude::*;
 use rand_xorshift::XorShiftRng;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
 /// Temperature functions for Simulated Annealing.

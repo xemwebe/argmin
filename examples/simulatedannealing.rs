@@ -13,7 +13,7 @@ use argmin::solver::simulatedannealing::{SATempFunc, SimulatedAnnealing};
 use argmin::testfunctions::rosenbrock;
 use rand::prelude::*;
 use rand_xorshift::XorShiftRng;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std::default::Default;
 use std::sync::Arc;

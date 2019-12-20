@@ -127,7 +127,8 @@ use argmin::prelude::*;
 use serde::{Serialize, Deserialize};
 
 /// First, create a struct for your problem
-#[derive(Clone, Default, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Default)]
 struct Rosenbrock {
     a: f64,
     b: f64,

@@ -11,7 +11,7 @@
 //! Springer. ISBN 0-387-30303-0.
 
 use crate::prelude::*;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std::fmt::Debug;
 
@@ -43,11 +43,10 @@ where
     O: ArgminOp<Output = f64>,
     O::Param: Debug
         + Clone
-        + Serialize
         + ArgminMul<f64, O::Param>
         + ArgminWeightedDot<O::Param, f64, O::Hessian>
         + ArgminNorm<f64>,
-    O::Hessian: Clone + Serialize,
+    O::Hessian: Clone,
 {
     const NAME: &'static str = "Cauchy Point";
 

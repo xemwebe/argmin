@@ -13,10 +13,11 @@ use argmin::solver::quasinewton::LBFGS;
 use argmin::testfunctions::rosenbrock;
 use argmin_core::finitediff::*;
 use ndarray::{array, Array1, Array2};
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Default, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Default)]
 struct Rosenbrock {
     a: f64,
     b: f64,

@@ -15,7 +15,7 @@
 //! Springer. ISBN 0-387-30303-0.
 
 use crate::prelude::*;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
 /// Steepest descent iteratively takes steps in the direction of the strongest negative gradient.
@@ -46,7 +46,6 @@ where
     O: ArgminOp<Output = f64>,
     O::Param: Clone
         + Default
-        + Serialize
         + ArgminSub<O::Param, O::Param>
         + ArgminDot<O::Param, f64>
         + ArgminScaledAdd<O::Param, f64, O::Param>

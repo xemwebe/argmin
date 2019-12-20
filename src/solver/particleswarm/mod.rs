@@ -12,7 +12,7 @@
 use crate::prelude::*;
 use argmin_core::ArgminAdd;
 use argmin_core::ArgminOp;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std;
 use std::default::Default;

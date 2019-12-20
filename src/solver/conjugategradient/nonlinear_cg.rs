@@ -14,9 +14,9 @@
 //! Springer. ISBN 0-387-30303-0.
 
 use crate::prelude::*;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::de::DeserializeOwned;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std::default::Default;
 
@@ -89,8 +89,6 @@ where
     O: ArgminOp<Param = P, Output = f64>,
     P: Clone
         + Default
-        + Serialize
-        + DeserializeOwned
         + ArgminSub<P, P>
         + ArgminDot<P, f64>
         + ArgminScaledAdd<P, f64, P>

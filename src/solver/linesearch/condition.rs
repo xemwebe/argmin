@@ -11,11 +11,11 @@
 //! Springer. ISBN 0-387-30303-0.
 
 use crate::{ArgminDot, ArgminError, Error};
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
 /// Needs to be implemented by everything that wants to be a LineSearchCondition
-pub trait LineSearchCondition<T>: Serialize {
+pub trait LineSearchCondition<T> {
     /// Evaluate the condition
     fn eval(
         &self,

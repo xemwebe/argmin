@@ -17,10 +17,11 @@ use crate::solver::linesearch::{HagerZhangLineSearch, MoreThuenteLineSearch};
 use crate::solver::newton::NewtonCG;
 use crate::solver::quasinewton::{BFGS, DFP, LBFGS};
 
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Default, Serialize, Deserialize, Debug)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Default, Debug)]
 struct MaxEntropy {
     F: Array2<f64>,
     K: Array1<f64>,

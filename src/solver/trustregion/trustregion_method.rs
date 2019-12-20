@@ -12,7 +12,7 @@
 
 use crate::prelude::*;
 use crate::solver::trustregion::reduction_ratio;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std::fmt::Debug;
 
@@ -97,7 +97,6 @@ where
     O::Param: Default
         + Clone
         + Debug
-        + Serialize
         + ArgminMul<f64, O::Param>
         + ArgminWeightedDot<O::Param, f64, O::Hessian>
         + ArgminNorm<f64>
@@ -106,7 +105,7 @@ where
         + ArgminSub<O::Param, O::Param>
         + ArgminZeroLike
         + ArgminMul<f64, O::Param>,
-    O::Hessian: Default + Clone + Debug + Serialize + ArgminDot<O::Param, O::Param>,
+    O::Hessian: Default + Clone + Debug + ArgminDot<O::Param, O::Param>,
     R: ArgminTrustRegion + Solver<OpWrapper<O>>,
 {
     const NAME: &'static str = "Trust region";

@@ -11,9 +11,9 @@
 //! Springer. ISBN 0-387-30303-0.
 
 use crate::prelude::*;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::de::DeserializeOwned;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std::collections::VecDeque;
 use std::fmt::Debug;
@@ -57,8 +57,6 @@ impl<O, L, P> Solver<O> for LBFGS<L, P>
 where
     O: ArgminOp<Param = P, Output = f64>,
     O::Param: Clone
-        + Serialize
-        + DeserializeOwned
         + Debug
         + Default
         + ArgminSub<O::Param, O::Param>
@@ -67,7 +65,7 @@ where
         + ArgminScaledAdd<O::Param, f64, O::Param>
         + ArgminNorm<f64>
         + ArgminMul<f64, O::Param>,
-    O::Hessian: Clone + Default + Serialize + DeserializeOwned,
+    O::Hessian: Clone + Default,
     L: Clone + ArgminLineSearch<O::Param> + Solver<OpWrapper<O>>,
 {
     const NAME: &'static str = "L-BFGS";

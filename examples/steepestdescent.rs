@@ -13,10 +13,11 @@ use argmin::solver::gradientdescent::SteepestDescent;
 use argmin::solver::linesearch::HagerZhangLineSearch;
 use argmin::solver::linesearch::MoreThuenteLineSearch;
 use argmin::testfunctions::{rosenbrock_2d, rosenbrock_2d_derivative};
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Default, Serialize, Deserialize)]
+#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[derive(Clone, Default)]
 struct Rosenbrock {
     a: f64,
     b: f64,

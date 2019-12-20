@@ -16,7 +16,7 @@
 //! [1] https://en.wikipedia.org/wiki/Landweber_iteration
 
 use crate::prelude::*;
-#[cfg(feature = "serde1")] 
+#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
 /// The Landweber iteration is a solver for ill-posed linear inverse problems.
