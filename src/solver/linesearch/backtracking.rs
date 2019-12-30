@@ -72,6 +72,31 @@ impl<P: Default, L> BacktrackingLineSearch<P, L> {
     }
 }
 
+#[cfg(feature = "serde1")]
+impl<P, L> ArgminLineSearch<P> for BacktrackingLineSearch<P, L>
+where
+    P: Clone + Serialize + ArgminSub<P, P> + ArgminDot<P, f64> + ArgminScaledAdd<P, f64, P>,
+    L: LineSearchCondition<P>,
+{
+    /// Set search direction
+    fn set_search_direction(&mut self, search_direction: P) {
+        self.search_direction = Some(search_direction);
+    }
+
+    /// Set initial alpha value
+    fn set_init_alpha(&mut self, alpha: f64) -> Result<(), Error> {
+        if alpha <= 0.0 {
+            return Err(ArgminError::InvalidParameter {
+                text: "LineSearch: Inital alpha must be > 0.".to_string(),
+            }
+            .into());
+        }
+        self.alpha = alpha;
+        Ok(())
+    }
+}
+
+#[cfg(not(feature = "serde1"))]
 impl<P, L> ArgminLineSearch<P> for BacktrackingLineSearch<P, L>
 where
     P: Clone + ArgminSub<P, P> + ArgminDot<P, f64> + ArgminScaledAdd<P, f64, P>,
@@ -95,6 +120,87 @@ where
     }
 }
 
+#[cfg(feature = "serde1")]
+impl<O, P, L> Solver<O> for BacktrackingLineSearch<P, L>
+where
+    P: Clone
+        + Serialize
+        + DeserializeOwned
+        + Default
+        + ArgminSub<P, P>
+        + ArgminDot<P, f64>
+        + ArgminScaledAdd<P, f64, P>,
+    O: ArgminOp<Param = P, Output = f64>,
+    L: LineSearchCondition<P>,
+{
+    const NAME: &'static str = "Backtracking Line search";
+
+    fn init(
+        &mut self,
+        op: &mut OpWrapper<O>,
+        state: &IterState<O>,
+    ) -> Result<Option<ArgminIterData<O>>, Error> {
+        self.init_param = state.get_param();
+        let cost = state.get_cost();
+        self.init_cost = if cost == std::f64::INFINITY {
+            op.apply(&self.init_param)?
+        } else {
+            cost
+        };
+
+        self.init_grad = state.get_grad().unwrap_or(op.gradient(&self.init_param)?);
+
+        if self.search_direction.is_none() {
+            return Err(ArgminError::NotInitialized {
+                text: "BacktrackingLineSearch: search_direction must be set.".to_string(),
+            }
+            .into());
+        }
+
+        Ok(None)
+    }
+
+    fn next_iter(
+        &mut self,
+        op: &mut OpWrapper<O>,
+        _state: &IterState<O>,
+    ) -> Result<ArgminIterData<O>, Error> {
+        let new_param = self
+            .init_param
+            .scaled_add(&self.alpha, self.search_direction.as_ref().unwrap());
+
+        let cur_cost = op.apply(&new_param)?;
+
+        self.alpha *= self.rho;
+
+        let mut out = ArgminIterData::new()
+            .param(new_param.clone())
+            .cost(cur_cost);
+
+        if self.condition.requires_cur_grad() {
+            out = out.grad(op.gradient(&new_param)?);
+        }
+
+        Ok(out)
+    }
+
+    fn terminate(&mut self, state: &IterState<O>) -> TerminationReason {
+        if self.condition.eval(
+            state.get_cost(),
+            state.get_grad().unwrap_or_default(),
+            self.init_cost,
+            self.init_grad.clone(),
+            self.search_direction.clone().unwrap(),
+            self.alpha,
+        ) {
+            TerminationReason::LineSearchConditionMet
+        } else {
+            TerminationReason::NotTerminated
+        }
+    }
+}
+
+#[cfg(not(feature = "serde1"))]
 impl<O, P, L> Solver<O> for BacktrackingLineSearch<P, L>
 where
     P: Clone + Default + ArgminSub<P, P> + ArgminDot<P, f64> + ArgminScaledAdd<P, f64, P>,
