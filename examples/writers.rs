@@ -16,7 +16,7 @@ use ndarray::{array, Array1, Array2};
 #[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Default)]
 struct Rosenbrock {
     a: f64,
@@ -54,18 +54,18 @@ fn run() -> Result<(), Error> {
     let solver = BFGS::new(init_hessian, linesearch);
 
     // Create writer
-    #[cfg(serde1)]
+    #[cfg(feature = "serde1")]
     let writer = WriteToFile::new("params", "param")
         // Set serializer to JSON
         .serializer(WriteToFileSerializer::JSON);
 
     // Create writer which only saves new best ones
-    #[cfg(serde1)]
+    #[cfg(feature = "serde1")]
     let writer2 = WriteToFile::new("params", "best")
         // Set serializer to JSON
         .serializer(WriteToFileSerializer::JSON);
 
-    #[cfg(serde1)]
+    #[cfg(feature = "serde1")]
     let res = Executor::new(cost, solver, init_param)
         .max_iters(10)
         .add_observer(ArgminSlogLogger::term(), ObserverMode::Always)
@@ -73,7 +73,7 @@ fn run() -> Result<(), Error> {
         .add_observer(writer2, ObserverMode::NewBest)
         .run()?;
 
-    #[cfg(not(serde1))]
+    #[cfg(not(feature = "serde1"))]
     let res = Executor::new(cost, solver, init_param)
         .max_iters(10)
         .add_observer(ArgminSlogLogger::term(), ObserverMode::Always)

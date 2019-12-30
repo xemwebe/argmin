@@ -25,7 +25,7 @@ use std::f64;
 /// # References:
 ///
 /// TODO
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 pub struct ParticleSwarm<O>
 where
     O: ArgminOp<Output = f64>,
@@ -226,7 +226,7 @@ trait_bound!(Position
 );
 
 /// A single particle
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Debug)]
 pub struct Particle<T: Position> {
     /// Position of particle

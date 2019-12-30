@@ -28,7 +28,7 @@ use std::fmt::Debug;
 ///
 /// [0] Jorge Nocedal and Stephen J. Wright (2006). Numerical Optimization.
 /// Springer. ISBN 0-387-30303-0.
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone)]
 pub struct ConjugateGradient<P, S> {
     /// b (right hand side)
@@ -40,13 +40,13 @@ pub struct ConjugateGradient<P, S> {
     /// previous p
     p_prev: P,
     /// r^T * r
-    #[cfg_attr(serde1, serde(skip))]
+    #[cfg_attr(feature = "serde1", serde(skip))]
     rtr: S,
     /// alpha
-    #[cfg_attr(serde1, serde(skip))]
+    #[cfg_attr(feature = "serde1", serde(skip))]
     alpha: S,
     /// beta
-    #[cfg_attr(serde1, serde(skip))]
+    #[cfg_attr(feature = "serde1", serde(skip))]
     beta: S,
 }
 

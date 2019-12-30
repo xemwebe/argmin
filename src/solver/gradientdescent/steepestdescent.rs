@@ -27,7 +27,7 @@ use serde::{Deserialize, Serialize};
 ///
 /// [0] Jorge Nocedal and Stephen J. Wright (2006). Numerical Optimization.
 /// Springer. ISBN 0-387-30303-0.
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone)]
 pub struct SteepestDescent<L> {
     /// line search

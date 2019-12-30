@@ -12,7 +12,7 @@ use argmin::solver::brent::Brent;
 use serde::{Deserialize, Serialize};
 
 /// Test function generalise from Wikipedia example
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Default)]
 struct TestFunc {
     zero1: f64,

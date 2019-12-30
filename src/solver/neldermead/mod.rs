@@ -37,7 +37,7 @@ use std::default::Default;
 /// # References:
 ///
 /// [Wikipedia](https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method)
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone)]
 pub struct NelderMead<O: ArgminOp> {
     /// alpha

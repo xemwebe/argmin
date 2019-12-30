@@ -52,7 +52,7 @@ impl std::error::Error for BrentError {
 ///
 /// # References:
 /// https://en.wikipedia.org/wiki/Brent%27s_method
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone)]
 pub struct Brent {
     /// required relative accuracy

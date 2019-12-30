@@ -22,7 +22,7 @@ type Measurement = (S, Rate);
 // Model used in this example:
 // `rate = (V_{max} * [S]) / (K_M + [S]) `
 // where `V_{max}` and `K_M` are the sought parameters and `[S]` and `rate` is the measured data.
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Default)]
 struct Problem {
     data: Vec<Measurement>,

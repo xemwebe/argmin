@@ -20,7 +20,7 @@ use crate::solver::quasinewton::{BFGS, DFP, LBFGS};
 #[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Default, Debug)]
 struct MaxEntropy {
     F: Array2<f64>,

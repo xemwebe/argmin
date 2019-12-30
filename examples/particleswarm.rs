@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 
 use argmin_testfunctions::himmelblau;
 
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Default, Clone)]
 struct Himmelblau {}
 

@@ -34,7 +34,7 @@ type Triplet = (f64, f64, f64);
 /// [0] William W. Hager and Hongchao Zhang. "A new conjugate gradient method with guaranteed
 /// descent and an efficient line search." SIAM J. Optim. 16(1), 2006, 170-192.
 /// DOI: https://doi.org/10.1137/030601880
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone)]
 pub struct HagerZhangLineSearch<P> {
     /// delta: (0, 0.5), used in the Wolve conditions

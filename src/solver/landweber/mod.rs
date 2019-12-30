@@ -33,7 +33,7 @@ use serde::{Deserialize, Serialize};
 /// [0] Landweber, L. (1951): An iteration formula for Fredholm integral equations of the first
 /// kind. Amer. J. Math. 73, 615–624
 /// [1] https://en.wikipedia.org/wiki/Landweber_iteration
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone)]
 pub struct Landweber {
     /// omega

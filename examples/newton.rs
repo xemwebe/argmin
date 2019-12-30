@@ -14,7 +14,7 @@ use ndarray::{Array, Array1, Array2};
 #[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Default)]
 struct Rosenbrock {
     a: f64,

@@ -14,7 +14,7 @@ use argmin_core::Error;
 #[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Default)]
 struct Rosenbrock {}
 
@@ -33,7 +33,7 @@ impl ArgminOp for Rosenbrock {
     }
 }
 
-#[cfg(serde1)]
+#[cfg(feature = "serde1")]
 fn run() -> Result<(), Error> {
     // define inital parameter vector
     let init_param: Vec<f64> = vec![1.2, 1.2];
@@ -57,7 +57,7 @@ fn run() -> Result<(), Error> {
     Ok(())
 }
 
-#[cfg(not(serde1))]
+#[cfg(not(feature = "serde1"))]
 fn run() -> Result<(), Error> {
     println!("Test skipped since feature 'serde1' is not enabled.");
     Ok(())

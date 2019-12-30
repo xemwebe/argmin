@@ -31,7 +31,7 @@ use serde::{Deserialize, Serialize};
 /// * `SATempFunc::Exponential`: `t_i = t_init * 0.95^i`
 // /// * `SATempFunc::Custom`: User provided temperature update function which must have the function
 // ///   signature `&Fn(init_temp: f64, iteration_number: u64) -> f64`
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]
 pub enum SATempFunc {
     /// `t_i = t_init / i`
@@ -62,7 +62,7 @@ impl std::default::Default for SATempFunc {
 /// [1] S Kirkpatrick, CD Gelatt Jr, MP Vecchi. (1983). "Optimization by Simulated Annealing".
 /// Science 13 May 1983, Vol. 220, Issue 4598, pp. 671-680
 /// DOI: 10.1126/science.220.4598.671  
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone)]
 pub struct SimulatedAnnealing {
     /// Initial temperature

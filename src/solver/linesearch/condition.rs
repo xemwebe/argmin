@@ -32,7 +32,7 @@ pub trait LineSearchCondition<T> {
 }
 
 /// Armijo Condition
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug, Default)]
 pub struct ArmijoCondition {
     c: f64,
@@ -73,7 +73,7 @@ where
 }
 
 /// Wolfe Condition
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug, Default)]
 pub struct WolfeCondition {
     c1: f64,
@@ -123,7 +123,7 @@ where
 }
 
 /// Strong Wolfe conditions
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug, Default)]
 pub struct StrongWolfeCondition {
     c1: f64,
@@ -173,7 +173,7 @@ where
 }
 
 /// Goldstein conditions
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug, Default)]
 pub struct GoldsteinCondition {
     c: f64,

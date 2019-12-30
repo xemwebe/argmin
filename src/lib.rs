@@ -131,11 +131,11 @@
 //! # extern crate ndarray;
 //! use argmin::testfunctions::{rosenbrock_2d, rosenbrock_2d_derivative, rosenbrock_2d_hessian};
 //! use argmin::prelude::*;
-//! #[cfg(serde1)]
+//! #[cfg(feature="serde1")]
 //! use serde::{Serialize, Deserialize};
 //!
 //! /// First, create a struct for your problem
-//! #[cfg_attr(serde1, derive(Serialize, Deserialize))]
+//! #[cfg_attr(feature="serde1", derive(Serialize, Deserialize))]
 //! #[derive(Clone, Default)]
 //! struct Rosenbrock {
 //!     a: f64,
@@ -187,10 +187,10 @@
 //! use argmin::solver::gradientdescent::SteepestDescent;
 //! use argmin::solver::linesearch::MoreThuenteLineSearch;
 //! # use argmin::testfunctions::{rosenbrock_2d, rosenbrock_2d_derivative};
-//! #[cfg(serde1)]
+//! #[cfg(feature="serde1")]
 //! # use serde::{Deserialize, Serialize};
 //! #
-//! #[cfg_attr(serde1, Serialize, Deserialize)]
+//! #[cfg_attr(feature="serde1", Serialize, Deserialize)]
 //! #[derive(Clone, Default)]
 //! # struct Rosenbrock {
 //! #     a: f64,
@@ -274,10 +274,10 @@
 //! # use argmin::solver::gradientdescent::SteepestDescent;
 //! # use argmin::solver::linesearch::MoreThuenteLineSearch;
 //! # use argmin::testfunctions::{rosenbrock_2d, rosenbrock_2d_derivative};
-//! #[cfg(serde1)]
+//! #[cfg(feature="serde1")]
 //! # use serde::{Deserialize, Serialize};
 //! #
-//! # #[cfg_attr(serde1, derive(Serialize, Deserialize))]
+//! # #[cfg_attr(feature="serde1", derive(Serialize, Deserialize))]
 //! # #[derive(Clone, Default)]
 //! # struct Rosenbrock {
 //! #     a: f64,
@@ -313,7 +313,7 @@
 //! # // Set up solver
 //! # let solver = SteepestDescent::new(linesearch);
 //! #
-//! # #[cfg(serde1)]
+//! # #[cfg(feature="serde1")]
 //! let res = Executor::new(problem, solver, init_param)
 //!     // Add an observer which will log all iterations to the terminal (without blocking)
 //!     .add_observer(ArgminSlogLogger::term_noblock(), ObserverMode::Always)
@@ -324,7 +324,7 @@
 //! #     .max_iters(2)
 //!     // run the solver on the defined problem
 //!     .run()?;
-//! # #[cfg(not(serde1))]
+//! # #[cfg(not(feature="serde1"))]
 //! # let res = Executor::new(problem, solver, init_param)
 //! #    .add_observer(ArgminSlogLogger::term_noblock(), ObserverMode::Always)
 //! #     .max_iters(2)
@@ -361,10 +361,10 @@
 //! # use argmin::solver::landweber::*;
 //! # use argmin::testfunctions::{rosenbrock_2d, rosenbrock_2d_derivative};
 //! # use argmin_core::Error;
-//! # #[cfg(serde1)]
+//! # #[cfg(feature="serde1")]
 //! # use serde::{Deserialize, Serialize};
 //! #
-//! # #[cfg_attr(serde1, derive(Serialize, Deserialize))]
+//! # #[cfg_attr(feature="serde1", derive(Serialize, Deserialize))]
 //! # #[derive(Clone, Default)]
 //! # struct Rosenbrock {}
 //! #
@@ -391,7 +391,7 @@
 //! #     let iters = 35;
 //! #     let solver = Landweber::new(0.001);
 //! #
-//! # #[cfg(serde1)]
+//! # #[cfg(feature="serde1")]
 //! let res = Executor::from_checkpoint(".checkpoints/optim.arg")
 //!     .unwrap_or(Executor::new(operator, solver, init_param))
 //!     .max_iters(iters)
@@ -399,13 +399,13 @@
 //!     .checkpoint_name("optim")
 //!     .checkpoint_mode(CheckpointMode::Every(20))
 //!     .run()?;
-//! # #[cfg(not(serde1))]
+//! # #[cfg(not(feature="serde1"))]
 //! # println!("Checkpointing requires to enable --features serde1 !");
-//! # 
+//! #
 //! #
 //! #     // Wait a second (lets the logger flush everything before printing to screen again)
 //! #     std::thread::sleep(std::time::Duration::from_secs(1));
-//! # #[cfg(serde1)]
+//! # #[cfg(feature="serde1")]
 //! #     println!("{}", res);
 //! #     Ok(())
 //! # }
@@ -436,13 +436,13 @@
 //!
 //! ```rust
 //! use argmin::prelude::*;
-//! #[cfg(serde1)]
+//! #[cfg(feature="serde1")]
 //! use serde::{Deserialize, Serialize};
 //!
 //! // Define a struct which holds any parameters/data which are needed during the execution of the
 //! // solver. Note that this does not include parameter vectors, gradients, Hessians, cost
 //! // function values and so on, as those will be handled by the `Executor`.
-//! #[cfg_attr(serde1, derive(Serialize, Deserialize))]
+//! #[cfg_attr(feature="serde1", derive(Serialize, Deserialize))]
 //! pub struct Landweber {
 //!     /// omega
 //!     omega: f64,

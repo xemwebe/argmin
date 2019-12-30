@@ -19,7 +19,7 @@ use std::default::Default;
 use std::sync::Arc;
 use std::sync::Mutex;
 
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone)]
 struct Rosenbrock {
     /// Parameter a, usually 1.0

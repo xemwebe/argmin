@@ -38,7 +38,7 @@ use std::default::Default;
 /// [0] Jorge J. More and David J. Thuente. "Line search algorithms with guaranteed sufficient
 /// decrease." ACM Trans. Math. Softw. 20, 3 (September 1994), 286-307.
 /// DOI: https://doi.org/10.1145/192115.192132
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Clone)]
 pub struct MoreThuenteLineSearch<P> {
     /// Search direction (builder)
@@ -89,7 +89,7 @@ pub struct MoreThuenteLineSearch<P> {
     infoc: usize,
 }
 
-#[cfg_attr(serde1, derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde1", derive(Serialize, Deserialize))]
 #[derive(Default, Clone)]
 struct Step {
     pub x: f64,
