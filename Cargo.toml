@@ -36,7 +36,7 @@ paste = "0.1.5"
 
 [features]
 default = []
-serde1 = ["serde", "argmin_core/serde1", "ndarray/serde-1"]
+serde1 = ["serde", "argmin_core/serde1", "ndarray/serde-1", "rand_xorshift/serde1"]
 ctrlc = ["argmin_core/ctrlc"]
 ndarrayl = ["argmin_core/ndarrayl"]
 visualizer = ["argmin_core/visualizer"]
