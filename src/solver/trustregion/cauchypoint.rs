@@ -43,10 +43,11 @@ where
     O: ArgminOp<Output = f64>,
     O::Param: Debug
         + Clone
+        + SerializeAlias
         + ArgminMul<f64, O::Param>
         + ArgminWeightedDot<O::Param, f64, O::Hessian>
         + ArgminNorm<f64>,
-    O::Hessian: Clone,
+    O::Hessian: Clone + SerializeAlias,
 {
     const NAME: &'static str = "Cauchy Point";
 

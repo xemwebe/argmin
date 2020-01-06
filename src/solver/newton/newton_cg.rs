@@ -57,6 +57,7 @@ where
     O::Param: Send
         + Sync
         + Clone
+        + SerializeAlias
         + Default
         + ArgminSub<O::Param, O::Param>
         + ArgminAdd<O::Param, O::Param>
@@ -66,8 +67,13 @@ where
         + ArgminConj
         + ArgminZeroLike
         + ArgminNorm<f64>,
-    O::Hessian:
-        Send + Sync + Clone + Default + ArgminInv<O::Hessian> + ArgminDot<O::Param, O::Param>,
+    O::Hessian: Send
+        + Sync
+        + Clone
+        + SerializeAlias
+        + Default
+        + ArgminInv<O::Hessian>
+        + ArgminDot<O::Param, O::Param>,
     L: Clone + ArgminLineSearch<O::Param> + Solver<OpWrapper<O>>,
 {
     const NAME: &'static str = "Newton-CG";
@@ -169,8 +175,8 @@ where
 
 impl<T, H> ArgminOp for CGSubProblem<T, H>
 where
-    T: Clone + Default + Send + Sync,
-    H: Clone + Default + ArgminDot<T, T> + Send + Sync,
+    T: Clone + Default + Send + Sync + SerializeAlias + DeserializeOwnedAlias,
+    H: Clone + Default + ArgminDot<T, T> + Send + Sync + SerializeAlias + DeserializeOwnedAlias,
 {
     type Param = T;
     type Output = T;

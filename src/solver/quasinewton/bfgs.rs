@@ -12,8 +12,6 @@
 
 use crate::prelude::*;
 #[cfg(feature = "serde1")]
-use serde::de::DeserializeOwned;
-#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std::fmt::Debug;
 
@@ -58,6 +56,8 @@ where
     O::Hessian: Clone
         + Default
         + Debug
+        + SerializeAlias
+        + DeserializeOwnedAlias
         + ArgminSub<O::Hessian, O::Hessian>
         + ArgminDot<O::Param, O::Param>
         + ArgminDot<O::Hessian, O::Hessian>

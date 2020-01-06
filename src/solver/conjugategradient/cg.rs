@@ -13,8 +13,6 @@
 use crate::prelude::*;
 // use num_complex::Complex;
 #[cfg(feature = "serde1")]
-use serde::de::DeserializeOwned;
-#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std::default::Default;
 use std::fmt::Debug;
@@ -92,6 +90,8 @@ impl<P, O, S> Solver<O> for ConjugateGradient<P, S>
 where
     O: ArgminOp<Param = P, Output = P>,
     P: Clone
+        + SerializeAlias
+        + DeserializeOwnedAlias
         + ArgminDot<P, S>
         + ArgminSub<P, P>
         + ArgminScaledAdd<P, S, P>

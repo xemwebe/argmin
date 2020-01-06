@@ -97,6 +97,7 @@ where
     O::Param: Default
         + Clone
         + Debug
+        + SerializeAlias
         + ArgminMul<f64, O::Param>
         + ArgminWeightedDot<O::Param, f64, O::Hessian>
         + ArgminNorm<f64>
@@ -105,7 +106,7 @@ where
         + ArgminSub<O::Param, O::Param>
         + ArgminZeroLike
         + ArgminMul<f64, O::Param>,
-    O::Hessian: Default + Clone + Debug + ArgminDot<O::Param, O::Param>,
+    O::Hessian: Default + Clone + Debug + SerializeAlias + ArgminDot<O::Param, O::Param>,
     R: ArgminTrustRegion + Solver<OpWrapper<O>>,
 {
     const NAME: &'static str = "Trust region";

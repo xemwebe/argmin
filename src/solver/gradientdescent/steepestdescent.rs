@@ -46,6 +46,7 @@ where
     O: ArgminOp<Output = f64>,
     O::Param: Clone
         + Default
+        + SerializeAlias
         + ArgminSub<O::Param, O::Param>
         + ArgminDot<O::Param, f64>
         + ArgminScaledAdd<O::Param, f64, O::Param>

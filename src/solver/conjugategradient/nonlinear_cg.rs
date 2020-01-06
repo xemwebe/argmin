@@ -15,8 +15,6 @@
 
 use crate::prelude::*;
 #[cfg(feature = "serde1")]
-use serde::de::DeserializeOwned;
-#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std::default::Default;
 
@@ -89,6 +87,8 @@ where
     O: ArgminOp<Param = P, Output = f64>,
     P: Clone
         + Default
+        + SerializeAlias
+        + DeserializeOwnedAlias
         + ArgminSub<P, P>
         + ArgminDot<P, f64>
         + ArgminScaledAdd<P, f64, P>

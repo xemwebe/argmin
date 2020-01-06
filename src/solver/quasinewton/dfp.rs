@@ -12,8 +12,6 @@
 
 use crate::prelude::*;
 #[cfg(feature = "serde1")]
-use serde::de::DeserializeOwned;
-#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
 /// DFP method
@@ -48,6 +46,7 @@ where
     O: ArgminOp<Output = f64, Hessian = H>,
     O::Param: Clone
         + Default
+        + SerializeAlias
         + ArgminSub<O::Param, O::Param>
         + ArgminDot<O::Param, f64>
         + ArgminDot<O::Param, O::Hessian>
@@ -57,6 +56,8 @@ where
         + ArgminTranspose,
     O::Hessian: Clone
         + Default
+        + SerializeAlias
+        + DeserializeOwnedAlias
         + ArgminSub<O::Hessian, O::Hessian>
         + ArgminDot<O::Param, O::Param>
         + ArgminDot<O::Hessian, O::Hessian>

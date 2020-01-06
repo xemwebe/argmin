@@ -10,31 +10,13 @@
 //! [0] Jorge Nocedal and Stephen J. Wright (2006). Numerical Optimization.
 //! Springer. ISBN 0-387-30303-0.
 
+use crate::argmin_core::SerializeAlias;
 use crate::{ArgminDot, ArgminError, Error};
 #[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
 /// Needs to be implemented by everything that wants to be a LineSearchCondition
-#[cfg(feature = "serde1")]
-pub trait LineSearchCondition<T>: Serialize {
-    /// Evaluate the condition
-    fn eval(
-        &self,
-        cur_cost: f64,
-        cur_grad: T,
-        init_cost: f64,
-        init_grad: T,
-        search_direction: T,
-        alpha: f64,
-    ) -> bool;
-
-    /// Indicates whether this condition requires the computation of the gradient at the new point
-    fn requires_cur_grad(&self) -> bool;
-}
-
-/// Needs to be implemented by everything that wants to be a LineSearchCondition
-#[cfg(not(feature = "serde1"))]
-pub trait LineSearchCondition<T> {
+pub trait LineSearchCondition<T>: SerializeAlias {
     /// Evaluate the condition
     fn eval(
         &self,

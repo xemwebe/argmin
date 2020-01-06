@@ -12,8 +12,6 @@
 
 use crate::prelude::*;
 #[cfg(feature = "serde1")]
-use serde::de::DeserializeOwned;
-#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 use std::collections::VecDeque;
 use std::fmt::Debug;
@@ -58,6 +56,8 @@ where
     O: ArgminOp<Param = P, Output = f64>,
     O::Param: Clone
         + Debug
+        + SerializeAlias
+        + DeserializeOwnedAlias
         + Default
         + ArgminSub<O::Param, O::Param>
         + ArgminAdd<O::Param, O::Param>
@@ -65,7 +65,7 @@ where
         + ArgminScaledAdd<O::Param, f64, O::Param>
         + ArgminNorm<f64>
         + ArgminMul<f64, O::Param>,
-    O::Hessian: Clone + Default,
+    O::Hessian: Clone + SerializeAlias + DeserializeOwnedAlias + Default,
     L: Clone + ArgminLineSearch<O::Param> + Solver<OpWrapper<O>>,
 {
     const NAME: &'static str = "L-BFGS";

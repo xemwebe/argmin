@@ -12,8 +12,6 @@
 
 use crate::prelude::*;
 #[cfg(feature = "serde1")]
-use serde::de::DeserializeOwned;
-#[cfg(feature = "serde1")]
 use serde::{Deserialize, Serialize};
 
 /// The Steihaug method is a conjugate gradients based approach for finding an approximate solution
@@ -145,6 +143,8 @@ where
     O: ArgminOp<Param = P, Output = f64>,
     P: Clone
         + Default
+        + SerializeAlias
+        + DeserializeOwnedAlias
         + ArgminMul<f64, P>
         + ArgminWeightedDot<P, f64, O::Hessian>
         + ArgminNorm<f64>
@@ -241,7 +241,7 @@ where
     }
 }
 
-impl<P: Clone> ArgminTrustRegion for Steihaug<P> {
+impl<P: Clone + SerializeAlias> ArgminTrustRegion for Steihaug<P> {
     fn set_radius(&mut self, radius: f64) {
         self.radius = radius;
     }
