@@ -8,11 +8,12 @@
 extern crate argmin;
 use argmin::prelude::*;
 use argmin::solver::brent::Brent;
-#[cfg(feature="serde1")]
-use serde::{Serialize, Serializer, Deserialize, Deserializer};
+extern crate fake_serialize_macro;
+
+use fake_serialize_macro::FakeSerialize;
 
 /// Test function generalise from Wikipedia example
-#[derive(Clone, Default)]
+#[derive(Clone, Default, FakeSerialize)]
 struct TestFunc {
     zero1: f64,
     zero2: f64,
@@ -28,26 +29,6 @@ impl ArgminOp for TestFunc {
     fn apply(&self, p: &Self::Param) -> Result<Self::Output, Error> {
         Ok((p + self.zero1) * (p - self.zero2) * (p - self.zero2))
     }
-}
-
-#[cfg(feature="serde1")]
-impl Serialize for TestFunc {
-    fn serialize<S>(&self, _serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer
-        {
-            Err(serde::ser::Error::custom(format!("serialization is disabled")))
-        }
-}
-
-#[cfg(feature="serde1")]
-impl<'de> Deserialize<'de> for TestFunc {
-    fn deserialize<D>(_deserializer: D) -> Result<Self, D::Error>
-    where
-        D: Deserializer<'de>
-        {
-            Err(serde::de::Error::custom(format!("deserialization is disabled")))
-        }
 }
 
 fn main() {

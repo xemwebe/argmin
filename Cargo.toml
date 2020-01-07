@@ -27,6 +27,7 @@ rand = { version = "0.7.2"}
 rand_xorshift = { version = "0.2.0" }
 serde = { version = "1.0", features = ["rc"], optional=true }
 approx = "0.3.2"
+fake_serialize_macro = { path = "./fake_serialize_macro" }
 
 [dev-dependencies]
 ndarray = { version = "0.13", features = ["serde-1"] }
@@ -36,7 +37,7 @@ paste = "0.1.5"
 
 [features]
 default = []
-serde1 = ["serde", "argmin_core/serde1", "ndarray/serde-1", "rand_xorshift/serde1"]
+serde1 = ["serde", "argmin_core/serde1", "ndarray/serde-1", "rand_xorshift/serde1", "fake_serialize_macro/serde1"]
 ctrlc = ["argmin_core/ctrlc"]
 ndarrayl = ["argmin_core/ndarrayl"]
 visualizer = ["argmin_core/visualizer"]
