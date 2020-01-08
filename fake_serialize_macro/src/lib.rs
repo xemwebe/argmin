@@ -19,22 +19,20 @@ pub fn fake_serialize_derive(input: TokenStream) -> TokenStream {
 fn impl_fake_serialize_macro(ast: &syn::DeriveInput) -> TokenStream {
     let name = &ast.ident;
     let gen = quote! {
-        use serde::{Deserialize, Deserializer, Serialize, Serializer};
-
-        impl Serialize for TestFunc {
+        impl serde::Serialize for #name {
             fn serialize<S>(&self, _serializer: S) -> Result<S::Ok, S::Error>
             where
-                S: Serializer
+                S: serde::Serializer
                 {
                     Err(serde::ser::Error::custom(format!("serialization is disabled")))
                 }
             }
 
         #[cfg(feature="serde1")]
-        impl<'de> Deserialize<'de> for TestFunc {
+        impl<'de> serde::Deserialize<'de> for #name {
             fn deserialize<D>(_deserializer: D) -> Result<Self, D::Error>
             where
-                D: Deserializer<'de>
+                D: serde::Deserializer<'de>
                 {
                     Err(serde::de::Error::custom(format!("deserialization is disabled")))
                 }
